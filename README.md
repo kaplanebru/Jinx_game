@@ -9,7 +9,7 @@ Currently working on/
 Completed/
 
 Bresenham's circle algorithm:
-- adaptation to C# & Unity
+- adaptation to C# and Unity
 
 Door:
 - slowly opening automatic door
