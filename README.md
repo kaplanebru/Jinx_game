@@ -1,15 +1,12 @@
 # Jinx_game
  
-+ A pixelart game where the enemy spreads bad luck as it grows bigger.
+A pixelart game where the enemy spreads bad luck as it grows bigger.
 
-Currently working on/
+Completed so far:
 
-- Enhancing the enemy growth mechanics using circle algorithm.
+Procedural generation of a circle made of pixels:
 
-Completed/
-
-Bresenham's circle algorithm:
-- adaptation to C# and Unity
+- Every second there is an increase in the pixel amount composing the circle, which would make the circle grow bigger without resolution loss.
 
 Door:
 - slowly opening automatic door
