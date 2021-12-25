@@ -17,18 +17,20 @@ public class Enemy : MonoBehaviour
     Vector2 screenBounds;
     bool move = true;
     bool onScale = true;
+
     
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        StartCoroutine(ScaleTime());
     }
 
     // Update is called once per frame
     void Update()
     {
         MoveEnemy();
-        Timer(scaleAmount);
+        //Timer(scaleAmount);
         Disembark();
     }
 
@@ -96,13 +98,12 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void Timer(float i)
+    IEnumerator ScaleTime()
     {
-        timer -= Time.deltaTime;
-        if (timer < 0)
+        while(true)
         {
-            ScaleEnemy(i);
-            timer = timeLeft;
+            ScaleEnemy(scaleAmount);
+            yield return new WaitForSeconds(timeLeft);
         }
     }
     
@@ -156,4 +157,14 @@ public class Enemy : MonoBehaviour
             //speed += 0.01f; //gravity hissi versin diye!
         }
     }
+
+    /*void Timer(float i)
+    {
+        timer -= Time.deltaTime;
+        if (timer < 0)
+        {
+            ScaleEnemy(i);
+            timer = timeLeft;
+        }
+    }*/
 }

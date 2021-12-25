@@ -9,12 +9,13 @@ public class BresenhamsMain : MonoBehaviour
     public Rigidbody2D pxlPb;
     public int R = 4;
     float period = 1;
-    float time = 1;
+    //float time = 1;
 
     // Start is called before the first frame update
     void Start()
     {   
         Physics2D.gravity = Vector2.zero;
+        StartCoroutine(UpdateCircle());
         //GenerateCircle();
     }
 
@@ -81,7 +82,17 @@ public class BresenhamsMain : MonoBehaviour
         Circle(R, -1, 1);
     }
 
-    void UpdateCircle()
+    IEnumerator UpdateCircle()
+    {
+        while(true)
+        {
+            GenerateCircle();
+            R++;
+            yield return new WaitForSeconds(period);
+        }
+    }
+
+    /*void UpdateCircle()
     {
         time -= Time.deltaTime;
         if (time < 0)
@@ -92,6 +103,6 @@ public class BresenhamsMain : MonoBehaviour
             time = period;
             //bir önceki halka silip, yeni halkanın içine fill denebilir.
         }
-    }
+    }*/
 
 }
