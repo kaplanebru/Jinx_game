@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
     public float speed = 5;
     public float scaleAmount = 20;
     public float timeLeft = 1f;
-    float timer = 1;
+    //float timer = 1;
     int directionX = 1;
     int directionY = 1;
     float objectHeight;
@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        //rb = GetComponent<Rigidbody2D>();
         StartCoroutine(ScaleTime());
     }
 
@@ -71,10 +71,15 @@ public class Enemy : MonoBehaviour
 
     int RandomDir()
     {
-        int[] dir = {1, -1, -1, -1, -1, -1, 1};
-        int i = Random.Range(0, 7); //2 exclusive
-        timer = timeLeft;
-        return dir[i];
+        int i = Random.Range(0, 7);
+        if (i == 1)
+        {
+            return 1;
+        }
+        else
+        {
+            return -1;
+        }
     }
                
 
@@ -126,6 +131,22 @@ public class Enemy : MonoBehaviour
             }
         }
     }
+    void Disembark()
+    {
+        var doorGap = GameObject.Find("DoorSpawner").GetComponent<DoorMotion>().doorsDistance;
+        //Debug.Log(doorGap);
+        if (doorGap >= transform.localScale.x)
+        {
+            directionY = -1;
+            var pos = transform.position;
+            pos.x = 0;//doorGap/2f;
+            pos.y= -screenBounds.y; 
+            //buraya move.towards, lerp ya da smooth.damp(playerdaki) gelecek
+            transform.position = pos;
+            onScale = false;
+            //speed += 0.01f; //gravity hissi versin diye
+        }
+    }
 
     void Boundaries()
     {
@@ -141,22 +162,7 @@ public class Enemy : MonoBehaviour
         transform.position = pos;
     }
 
-    void Disembark()
-    {
-        var doorGap = GameObject.Find("DoorSpawner").GetComponent<DoorMotion>().doorsDistance;
-        //Debug.Log(doorGap);
-        if (doorGap >= transform.localScale.x)
-        {
-            directionY = -1;
-            var pos = transform.position;
-            pos.x = 0;//doorGap/2f;
-            pos.y= -screenBounds.y; 
-            //buraya move.towards, lerp ya da smooth.damp(playerdasi) gelecek
-            transform.position = pos;
-            onScale = false;
-            //speed += 0.01f; //gravity hissi versin diye!
-        }
-    }
+
 
     /*void Timer(float i)
     {

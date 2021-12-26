@@ -6,8 +6,10 @@ public class BresenhamsMain : MonoBehaviour
 {
     /*List<int> xValues = new List<int>();
     List<int> yValues = new List<int>();*/
-    public Rigidbody2D pxlPb;
+    //public Rigidbody2D pxlPb;
     public int R = 4;
+    public GameObject circleParent;
+    public GameObject pxlPb;
     float period = 1;
     //float time = 1;
 
@@ -27,9 +29,8 @@ public class BresenhamsMain : MonoBehaviour
 
     void SpawnPxl(int x, int y)
     {
-            Rigidbody2D pxl = Instantiate(pxlPb, SpawnPos(x, y), transform.rotation);
-            //x = x + unit;
-            //y = y + unit;
+            GameObject pxl = Instantiate(pxlPb, SpawnPos(x, y), transform.rotation);
+            pxl.transform.parent = circleParent.transform;
     }
 
     Vector2 SpawnPos(int x, int y)
